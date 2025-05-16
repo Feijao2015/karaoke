@@ -47,7 +47,7 @@ const SongSearch: React.FC<SongSearchProps> = ({ onSongSelect }) => {
     );
 
     // Limit to first 10 results
-    setFilteredSongs(filtered.slice(0, 10));
+    setFilteredSongs(filtered.slice(0, 20));
   }, [searchTerm, songs]);
 
   const handleSongClick = (song: Song) => {

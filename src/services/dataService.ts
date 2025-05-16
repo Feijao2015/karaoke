@@ -310,7 +310,7 @@ export const clearQueue = async (): Promise<boolean> => {
     const { error } = await supabase
       .from('queue')
       .delete()
-      .gte('id', '0'); // Deleta todos os registros
+      .neq('id', '00000000-0000-0000-0000-000000000000'); // Deleta todos os registros
 
     if (error) {
       console.error('Erro ao limpar fila:', error.message);
@@ -487,7 +487,7 @@ export const clearRanking = async (): Promise<boolean> => {
     const { error } = await supabase
       .from('ranking')
       .delete()
-      .gte('id', '0'); // Deleta todos os registros
+      .neq('id', '00000000-0000-0000-0000-000000000000'); // Deleta todos os registros
 
     if (error) {
       console.error('Erro ao limpar ranking:', error.message);

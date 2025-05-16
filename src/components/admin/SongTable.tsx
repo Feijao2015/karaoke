@@ -79,7 +79,8 @@ const SongTable = () => {
   const handleSave = async () => {
     try {
       if (isAdding) {
-        await addSong(currentSong);
+        const { id, ...songWithoutId } = currentSong;
+        await addSong(songWithoutId);
       } else if (isEditing) {
         await updateSong(currentSong);
       }

@@ -59,20 +59,25 @@ const QueueManager = () => {
   };
   
   const handleClear = async () => {
-    if (window.confirm('Tem certeza que deseja limpar toda a fila?')) {
+    if (window.confirm('Tem certeza que deseja limpar toda a fila? Esta ação não pode ser desfeita.')) {
       try {
         setLoading(true);
-        await clearQueue();
-        setQueue([]);
-        toast({
-          title: "Sucesso",
-          description: "Fila limpa com sucesso.",
-        });
+        const success = await clearQueue();
+        
+        if (success) {
+          setQueue([]);
+          toast({
+            title: "Sucesso",
+            description: "Fila limpa com sucesso.",
+          });
+        } else {
+          throw new Error('Falha ao limpar a fila');
+        }
       } catch (error) {
         console.error('Erro ao limpar fila:', error);
         toast({
           title: "Erro",
-          description: "Não foi possível limpar a fila.",
+          description: "Não foi possível limpar a fila. Tente novamente.",
           variant: "destructive"
         });
       } finally {
